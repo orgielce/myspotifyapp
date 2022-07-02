@@ -7,10 +7,11 @@ import PrivateRoute from "./routes/private.route";
 import {Navbar} from "./pages/Navbar";
 import {MainView} from "./pages/MainView";
 import {GetToken} from "./pages/GetToken";
+import {NotFoundPage} from "./pages/NotFoundPage";
 
 const Main = styled.main`
   color: white;
-  height: 93.6vh;
+  height: 93vh;
   padding: 50px 100px;
 `;
 
@@ -22,7 +23,7 @@ const App = () => {
         <Switch>
           <PrivateRoute exact={true} path="/" component={MainView} />
           <Route exact={true} path="/token" component={GetToken} />
-          {/*<Route path="*" component={NotFoundPage} />*/}
+          <Route path="*" component={NotFoundPage} />
         </Switch>
       </Main>
     </Router>
