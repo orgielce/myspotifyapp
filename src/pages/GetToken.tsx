@@ -5,6 +5,6 @@ const Element = styled.div`
   display: flex;
 `;
 
-export const GeneralLayout = () => {
-  return <h1 className="text-9xl text-amber-600 font-bold">orgiel dale ...</h1>;
+export const GetToken = () => {
+  return <Element>token</Element>;
 };
