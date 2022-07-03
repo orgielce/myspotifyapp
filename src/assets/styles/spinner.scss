@@ -1,6 +1,10 @@
 @keyframes spinner {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 .app-spinner:before {
   content: "";
@@ -14,7 +18,7 @@
   margin-top: -10px;
   margin-left: -10px;
   border-radius: 50%;
-  border: 3px solid #8F8E94;
+  border: 3px solid #8f8e94;
   border-top-color: #323235;
   animation: spinner 0.8s linear infinite;
 }

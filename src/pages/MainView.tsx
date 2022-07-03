@@ -1,5 +1,6 @@
-import React, {useState} from "react";
+import React from "react";
+import {Presentation} from "../components/Presentation";
 
 export const MainView = () => {
-  return <>main</>;
+  return <Presentation title="New releases" />;
 };
