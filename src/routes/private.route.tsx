@@ -1,8 +1,10 @@
 import {Route, Redirect, useLocation} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {RootState} from "../redux/store";
 
 // @ts-ignore
 export default function PrivateRoute({component: Component, ...rest}) {
-  const {isAuthenticated}: any = false;
+  const {isAuthenticated} = useSelector((state: RootState) => state.token);
   const location = useLocation();
 
   return (
@@ -13,7 +15,7 @@ export default function PrivateRoute({component: Component, ...rest}) {
         <Redirect
           exact={true}
           to={{
-            pathname: "/token",
+            pathname: "/",
             state: {from: location},
           }}
         />

@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import SpotifyLogo from "../assets/Spotify_logo_with_text.svg";
+import {useSelector} from "react-redux";
+import {RootState} from "../redux/store";
+import {Link} from "react-router-dom";
 
 const ImageContainer = styled.img`
   filter: brightness(100); // white
@@ -9,6 +12,7 @@ const ImageContainer = styled.img`
 `;
 
 export const Navbar = () => {
+  const {isAuthenticated} = useSelector((state: RootState) => state.token);
   const searchHandler = (e: any) => console.log(e.target.value);
 
   return (
@@ -53,6 +57,9 @@ export const Navbar = () => {
                 placeholder="Buscar Canción"
               />
             </div>
+          </div>
+          <div className="ml-20 text-customText py-2">
+            {isAuthenticated ? "Hola, Orgiel" : ""}
           </div>
         </div>
       </nav>

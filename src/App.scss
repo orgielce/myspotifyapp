@@ -1,4 +1,6 @@
-header { min-width: 452px !important; }
+header {
+  min-width: 452px !important;
+}
 
 @media screen and (min-width: 961px) {
   header {
@@ -31,7 +33,7 @@ header { min-width: 452px !important; }
     input {
       width: 130px !important;
       &::placeholder {
-        content: 'Buscar ...';
+        content: "Buscar ...";
       }
     }
     nav {
@@ -46,7 +48,8 @@ header { min-width: 452px !important; }
 
 @media screen and (max-width: 460px) {
   header {
-    input, svg {
+    input,
+    svg {
       visibility: hidden !important;
     }
   }
