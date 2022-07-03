@@ -1,17 +1,8 @@
 import React, {useEffect} from "react";
-import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../redux/store";
 import {GetAccessToken} from "../services";
-import {AsyncThunkAction} from "@reduxjs/toolkit";
 import {useHistory} from "react-router-dom";
-
-const Element = styled.div`
-  display: flex;
-
-  color: white;
-  font-size: small;
-`;
 
 export const GetToken = () => {
   const dispatch = useDispatch();
@@ -31,7 +22,7 @@ export const GetToken = () => {
       {isLoading && <div className="app-spinner"></div>}
 
       {error && (
-        <p>
+        <p className="text-customText font-bold">
           Hubo un error al intentar obtener el access token, vualva a intentarlo por
           favor.
         </p>
