@@ -1,0 +1,53 @@
+header { min-width: 452px !important; }
+
+@media screen and (min-width: 961px) {
+  header {
+    svg {
+      transform: unset !important;
+    }
+  }
+}
+
+@media screen and (max-width: 960px) {
+  header {
+    input {
+      width: 250px !important;
+    }
+    svg {
+      transform: translateX(-14px) !important;
+    }
+    nav {
+      div {
+        div {
+          margin-left: 15px !important;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 720px) {
+  header {
+    input {
+      width: 130px !important;
+      &::placeholder {
+        content: 'Buscar ...';
+      }
+    }
+    nav {
+      div {
+        div {
+          margin-left: 10px !important;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 460px) {
+  header {
+    input, svg {
+      visibility: hidden !important;
+    }
+  }
+}

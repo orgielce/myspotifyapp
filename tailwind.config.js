@@ -6,6 +6,7 @@ module.exports = {
       primary: "#151618",
       secondary: "#262628",
       neutral: "#323235",
+      customText: "#8F8E94",
     },
     extend: {},
   },
