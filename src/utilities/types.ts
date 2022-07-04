@@ -9,8 +9,7 @@ export type PresentationProps = {
 
 export type CardProps = {
   title: string;
-  likes: string;
-  order: string;
   image: string;
+  artist?: Artist;
   type: "release" | "song" | "artist" | null;
 };

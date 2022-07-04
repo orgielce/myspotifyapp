@@ -16,11 +16,7 @@ const initialState: Token = {
 export const tokenSlice = createSlice({
   name: "token",
   initialState,
-  reducers: {
-    increment: (state) => {
-      state.expires_in += 1;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(GetAccessToken.pending, (state) => {

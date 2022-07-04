@@ -11,7 +11,21 @@ const initialState: Releases = {
 export const releaseSlice = createSlice({
   name: "releases",
   initialState,
-  reducers: {},
+  reducers: {
+    setAlbumsSuccess: (state, action) => {
+      state.albums = action.payload.albums;
+      state.isLoading = false;
+      state.error = false;
+    },
+    setAlbumsFiled: (state) => {
+      state.isLoading = false;
+      state.error = true;
+    },
+    setAlbumsBegin: (state) => {
+      state.isLoading = true;
+      state.error = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(GetNewReleases.pending, (state) => {
@@ -32,5 +46,7 @@ export const releaseSlice = createSlice({
       });
   },
 });
+
+export const {setAlbumsFiled, setAlbumsSuccess, setAlbumsBegin} = releaseSlice.actions;
 
 export default releaseSlice.reducer;
