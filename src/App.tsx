@@ -13,7 +13,6 @@ import {NotFoundPage} from "./pages/NotFoundPage";
 
 const Main = styled.main`
   color: white;
-  height: 93vh;
   padding: 50px 100px;
 `;
 
@@ -21,7 +20,7 @@ const App = () => {
   return (
     <Router>
       <Navbar />
-      <Main className="bg-primary">
+      <Main className="relative bg-primary h-full overflow-hidden">
         <Switch>
           <Route exact={true} path="/" component={GetToken} />
           <PrivateRoute exact={true} path="/board" component={MainView} />

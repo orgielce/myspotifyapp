@@ -29,7 +29,6 @@ export const MainView = () => {
     })
       .then((res) => dispatch(setAlbumsSuccess(res.data)))
       .catch((error) => dispatch(setAlbumsFiled()));
-    console.log(page);
   }, [page]);
 
   return (

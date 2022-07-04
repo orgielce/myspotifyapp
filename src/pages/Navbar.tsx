@@ -3,7 +3,6 @@ import styled from "styled-components";
 import SpotifyLogo from "../assets/Spotify_logo_with_text.svg";
 import {useSelector} from "react-redux";
 import {RootState} from "../redux/store";
-import {Link} from "react-router-dom";
 
 const ImageContainer = styled.img`
   filter: brightness(100); // white
@@ -16,7 +15,7 @@ export const Navbar = () => {
   const searchHandler = (e: any) => console.log(e.target.value);
 
   return (
-    <header>
+    <header className="sticky top-0 z-50">
       <nav className="bg-secondary border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
         <div className="flex flex-wrap items-start">
           <ImageContainer src={SpotifyLogo} alt="SpotifyLogo" />

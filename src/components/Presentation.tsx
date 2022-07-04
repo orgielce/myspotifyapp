@@ -3,8 +3,6 @@ import {PresentationProps} from "../utilities/types";
 import {Card} from "./Card";
 import {Pagination} from "./Pagination";
 
-// pagination icons
-
 export const Presentation: FunctionComponent<PresentationProps> = ({
   title,
   type,
@@ -14,7 +12,7 @@ export const Presentation: FunctionComponent<PresentationProps> = ({
   return (
     <div className="grid place-items-center">
       <div className="text-4xl">{title}</div>
-      <Pagination></Pagination>
+      <Pagination />
       {type && (
         <div className="h-full md:h-screen w-full">
           <section className="container mx-auto px-2 md:px-2 py-4">
