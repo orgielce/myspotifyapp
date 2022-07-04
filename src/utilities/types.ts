@@ -6,4 +6,13 @@ export const ClientSecret = "d04b7ba73ffc47778af5791b54b3d888";
 
 export type PresentationProps = {
   title: string;
+  type: "release" | "song" | "artist" | null;
+};
+
+export type CardProps = {
+  title: string;
+  likes: string;
+  order: string;
+  image: string;
+  type: "release" | "song" | "artist" | null;
 };
