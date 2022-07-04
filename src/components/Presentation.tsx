@@ -1,7 +1,12 @@
 import React, {FunctionComponent} from "react";
 import {PresentationProps} from "../utilities/types";
 
-export const Presentation: FunctionComponent<PresentationProps> = ({title, type}) => {
+export const Presentation: FunctionComponent<PresentationProps> = ({
+  title,
+  type,
+  albums,
+  artists,
+}) => {
   // console.log(title);
 
   return (

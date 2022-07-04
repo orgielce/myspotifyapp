@@ -10,8 +10,6 @@ import {Navbar} from "./pages/Navbar";
 import {MainView} from "./pages/MainView";
 import {GetToken} from "./pages/GetToken";
 import {NotFoundPage} from "./pages/NotFoundPage";
-import {RootState} from "./redux/store";
-import {useSelector} from "react-redux";
 
 const Main = styled.main`
   color: white;

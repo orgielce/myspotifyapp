@@ -1,7 +1,8 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {Token} from "../../models/index";
 import {GetAccessToken} from "../../services/index";
-import {useHistory} from "react-router-dom";
+import {GetNewReleases} from "../../services/release.service";
+import {useDispatch} from "react-redux";
 
 const initialState: Token = {
   access_token: "",
@@ -24,9 +25,11 @@ export const tokenSlice = createSlice({
     builder
       .addCase(GetAccessToken.pending, (state) => {
         state.isLoading = true;
+        state.error = false;
       })
       .addCase(GetAccessToken.rejected, (state) => {
         state.error = true;
+        state.isLoading = false;
       })
       .addCase(GetAccessToken.fulfilled, (state, action) => {
         // @ts-ignore

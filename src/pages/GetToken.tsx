@@ -12,6 +12,8 @@ export const GetToken = () => {
   );
 
   useEffect(() => {
+    // @ts-ignore
+    dispatch(GetAccessToken());
     if (isAuthenticated) {
       history.push("/board");
     }
@@ -30,8 +32,6 @@ export const GetToken = () => {
 
       <button
         type="button"
-        // @ts-ignore
-        onClick={() => dispatch(GetAccessToken())}
         className="relative inline-block px-6 py-2.5 bg-neutral text-customText font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
       >
         Haga clic para obtener token

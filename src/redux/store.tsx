@@ -1,9 +1,11 @@
 import {configureStore, ThunkAction, Action} from "@reduxjs/toolkit";
 import tokenReducer from "./reducers/tokenSlice";
+import releasesReducer from "./reducers/releaseSlice";
 
 export const store = configureStore({
   reducer: {
     token: tokenReducer,
+    releases: releasesReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

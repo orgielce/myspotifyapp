@@ -1,5 +1,7 @@
 export interface Releases {
-  albums: Albums;
+  albums: Albums | undefined;
+  isLoading: boolean;
+  error: boolean;
 }
 
 export interface Albums {
