@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {Presentation} from "../components/Presentation";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../redux/store";
@@ -12,12 +12,14 @@ import {
 
 export const MainView = () => {
   const dispatch = useDispatch();
-  const {albums, isLoading, error} = useSelector((state: RootState) => state.releases);
+  const {albums, page, isLoading, error} = useSelector(
+    (state: RootState) => state.releases
+  );
   const {access_token} = useSelector((state: RootState) => state.token);
 
   useEffect(() => {
     dispatch(setAlbumsBegin());
-    axios(`${BASE_APP_URL}/browse/new-releases`, {
+    axios(`${BASE_APP_URL}/browse/new-releases?limit=12&offset=${page}`, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -27,7 +29,8 @@ export const MainView = () => {
     })
       .then((res) => dispatch(setAlbumsSuccess(res.data)))
       .catch((error) => dispatch(setAlbumsFiled()));
-  }, []);
+    console.log(page);
+  }, [page]);
 
   return (
     <>

@@ -1,5 +1,7 @@
 export interface Releases {
   albums: Albums | undefined;
+  page: number;
+  limit: number;
   isLoading: boolean;
   error: boolean;
 }

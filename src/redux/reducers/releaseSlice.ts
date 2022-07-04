@@ -4,6 +4,8 @@ import {GetNewReleases} from "../../services/release.service";
 
 const initialState: Releases = {
   albums: undefined,
+  page: 10,
+  limit: 12,
   isLoading: false,
   error: false,
 };
@@ -24,6 +26,9 @@ export const releaseSlice = createSlice({
     setAlbumsBegin: (state) => {
       state.isLoading = true;
       state.error = false;
+    },
+    setCurrentPage: (state, action) => {
+      state.page = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -47,6 +52,7 @@ export const releaseSlice = createSlice({
   },
 });
 
-export const {setAlbumsFiled, setAlbumsSuccess, setAlbumsBegin} = releaseSlice.actions;
+export const {setAlbumsFiled, setAlbumsSuccess, setAlbumsBegin, setCurrentPage} =
+  releaseSlice.actions;
 
 export default releaseSlice.reducer;
