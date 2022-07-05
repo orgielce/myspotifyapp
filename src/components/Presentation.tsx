@@ -38,6 +38,7 @@ export const Presentation: FunctionComponent<PresentationProps> = ({
             {type === "release" &&
               albums?.items.map((element, index) => (
                 <Card
+                  id={element.id}
                   key={element.id}
                   title={element.name}
                   image={element.images[1].url}

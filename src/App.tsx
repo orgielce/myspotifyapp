@@ -10,6 +10,7 @@ import {Navbar} from "./pages/Navbar";
 import {MainView} from "./pages/MainView";
 import {GetToken} from "./pages/GetToken";
 import {NotFoundPage} from "./pages/NotFoundPage";
+import {Details} from "./components/Details";
 
 const Main = styled.main`
   color: white;
@@ -24,6 +25,7 @@ const App = () => {
         <Switch>
           <Route exact={true} path="/token" component={GetToken} />
           <PrivateRoute exact={true} path="/" component={MainView} />
+          <PrivateRoute exact={true} path="/details/:id" component={Details} />
           <Route path="*" component={NotFoundPage} />
         </Switch>
       </Main>

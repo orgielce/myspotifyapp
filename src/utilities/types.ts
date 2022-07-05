@@ -13,6 +13,7 @@ export type CardProps = {
   name: string;
   image: string;
   track?: any;
+  id?: string;
   type: "release" | "track" | "artist" | null;
 };
 
