@@ -3,8 +3,6 @@ import {SearchArtists} from "../../models/index";
 
 const initialState: SearchArtists = {
   artists: undefined,
-  page: 10,
-  limit: 14,
   filter: undefined,
   isLoading: false,
   error: false,

@@ -23,16 +23,6 @@ export const Pagination = () => {
 
   return (
     <div className="flex flex-nowrap mt-8 py-3 text-3xl cursor-pointer ml-auto md:mr-10 lg:mr-10 2xl:mr-28">
-      {/*{page === 10 && (*/}
-      {/*  <div onClick={setPreviousValue} className="mr-5 opacity-25">*/}
-      {/*    <BsArrowLeftCircle />*/}
-      {/*  </div>*/}
-      {/*)}*/}
-      {/*{page > 10 && (*/}
-      {/*  <div onClick={setPreviousValue} className="mr-5">*/}
-      {/*    <BsArrowLeftCircle />*/}
-      {/*  </div>*/}
-      {/*)}*/}
       <div onClick={setPreviousValue} className="mr-5">
         {page === 10 && <BsArrowLeftCircle className="opacity-25" />}
         {page > 10 && <BsArrowLeftCircle />}

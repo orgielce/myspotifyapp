@@ -6,8 +6,6 @@ export interface Releases {
 
 export interface SearchArtists {
   artists: Artists | undefined;
-  page: number;
-  limit: number;
   filter: string | undefined;
   isLoading: boolean;
   error: boolean;
