@@ -29,7 +29,7 @@ export const Pagination = () => {
         </div>
       )}
       {page > 10 && (
-        <div onClick={setPreviousValue} className="mr-5">
+        <div onClick={setNextValue} className="mr-5">
           <BsArrowLeftCircle />
         </div>
       )}

@@ -13,3 +13,5 @@ export type CardProps = {
   artist?: Artist;
   type: "release" | "song" | "artist" | null;
 };
+
+export type NotificationType = "success" | "error" | "info" | "warning" | "open";

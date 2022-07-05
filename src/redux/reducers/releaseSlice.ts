@@ -5,7 +5,7 @@ import {GetNewReleases} from "../../services/release.service";
 const initialState: Releases = {
   albums: undefined,
   page: 10,
-  limit: 12,
+  limit: 14,
   isLoading: false,
   error: false,
 };

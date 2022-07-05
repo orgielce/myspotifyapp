@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../redux/store";
 import {GetAccessToken} from "../services";
 import {useHistory} from "react-router-dom";
+import {openPopup} from "../components/notification";
 
 export const GetToken = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ export const GetToken = () => {
     // @ts-ignore
     dispatch(GetAccessToken());
     if (isAuthenticated) {
+      openPopup("info", null, `Hola Orgiel, su token ha sido guardado.`, "top");
       history.push("/board");
     }
   }, [isAuthenticated]);
@@ -23,12 +25,14 @@ export const GetToken = () => {
     <>
       {isLoading && <div className="app-spinner"></div>}
 
-      {error && (
-        <p className="text-customText font-bold">
-          Hubo un error al intentar obtener el access token, vualva a intentarlo por
-          favor.
-        </p>
-      )}
+      {error &&
+        openPopup(
+          "error",
+          null,
+          `Hubo un error al intentar obtener el token, vualva a intentarlo por
+          favor.`,
+          "top"
+        )}
 
       <button
         type="button"

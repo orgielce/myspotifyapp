@@ -1,5 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+// Ant Design styles
+@import "../node_modules/antd/dist/antd.css";
+
 // custom styles
 @import "./assets/styles/spinner.scss";
