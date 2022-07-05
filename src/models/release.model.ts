@@ -6,6 +6,15 @@ export interface Releases {
   error: boolean;
 }
 
+export interface SearchArtists {
+  artists: Artists | undefined;
+  page: number;
+  limit: number;
+  filter: string | undefined;
+  isLoading: boolean;
+  error: boolean;
+}
+
 export interface Albums {
   href: string;
   items: Item[];
@@ -14,6 +23,18 @@ export interface Albums {
   offset: number;
   previous: string;
   total: number;
+}
+
+export interface Artists {
+  href: string;
+  items: Artist[];
+  limit: number;
+  next: string;
+  offset: number;
+  previous: string;
+  total: number;
+  isLoading: boolean;
+  error: boolean;
 }
 
 export interface Artist {
@@ -25,6 +46,8 @@ export interface Artist {
   name: string;
   type: string;
   uri: string;
+  images: Image[];
+  popularity?: number;
 }
 
 export interface Item {

@@ -1,9 +1,9 @@
-import {Albums, Artist} from "../models";
+import {Albums, Artist, Artists} from "../models";
 
 export type PresentationProps = {
   title: string;
   albums?: Albums;
-  artists?: Artist;
+  artists?: Artists;
   type: "release" | "song" | "artist" | null;
 };
 
