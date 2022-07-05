@@ -22,7 +22,7 @@ export const Presentation: FunctionComponent<PresentationProps> = ({
                   key={element.id}
                   title={element.name}
                   image={element.images[1].url}
-                  artist={element.artists[0]}
+                  name={element.artists[0].name}
                   type={"release"}
                 />
               ))}
@@ -30,9 +30,16 @@ export const Presentation: FunctionComponent<PresentationProps> = ({
               artists?.items.map((element, index) => (
                 <Card
                   key={element.id}
-                  title={element.name}
-                  image={element.images[1].url}
-                  artist={element}
+                  name={element.name}
+                  image={
+                    element &&
+                    element.images &&
+                    element.images.length &&
+                    element.images.length > 0
+                      ? element.images[0].url
+                      : ""
+                  }
+                  title={""}
                   type={"artist"}
                 />
               ))}

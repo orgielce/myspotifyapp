@@ -15,7 +15,7 @@ export default function PrivateRoute({component: Component, ...rest}) {
         <Redirect
           exact={true}
           to={{
-            pathname: "/",
+            pathname: "/token",
             state: {from: location},
           }}
         />

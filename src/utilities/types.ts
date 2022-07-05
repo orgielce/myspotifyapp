@@ -9,8 +9,8 @@ export type PresentationProps = {
 
 export type CardProps = {
   title: string;
+  name: string;
   image: string;
-  artist?: Artist;
   type: "release" | "song" | "artist" | null;
 };
 

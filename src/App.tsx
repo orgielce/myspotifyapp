@@ -10,7 +10,6 @@ import {Navbar} from "./pages/Navbar";
 import {MainView} from "./pages/MainView";
 import {GetToken} from "./pages/GetToken";
 import {NotFoundPage} from "./pages/NotFoundPage";
-import {Artists} from "./pages/Artists";
 
 const Main = styled.main`
   color: white;
@@ -23,10 +22,8 @@ const App = () => {
       <Navbar />
       <Main className="relative bg-primary h-full overflow-hidden">
         <Switch>
-          <Route exact={true} path="/" component={GetToken} />
-          <PrivateRoute exact={true} path="/board" component={MainView} />
-          <PrivateRoute exact={true} path="/artists" component={Artists} />
-          {/*<PrivateRoute exact={true} path="/songs" component={Songs} />*/}
+          <Route exact={true} path="/token" component={GetToken} />
+          <PrivateRoute exact={true} path="/" component={MainView} />
           <Route path="*" component={NotFoundPage} />
         </Switch>
       </Main>

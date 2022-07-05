@@ -2,7 +2,7 @@ import React, {FunctionComponent} from "react";
 
 import {CardProps} from "../utilities/types";
 
-export const Card: FunctionComponent<CardProps> = ({title, image, type, artist}) => {
+export const Card: FunctionComponent<CardProps> = ({title, image, type, name}) => {
   return (
     <div className="bg-white hover:bg-gray-800 shadow-xl hover:shadow-none cursor-pointer w-auto rounded flex flex-col items-center justify-center transition-all duration-500 ease-in-out">
       <div className="relative mt-2 mx-2">
@@ -11,8 +11,10 @@ export const Card: FunctionComponent<CardProps> = ({title, image, type, artist})
         </div>
       </div>
       <div className="pt-3 pb-3 w-full">
-        <h1 className="leading-none text-base tracking-wider text-gray-400">{`${title}`}</h1>
-        <span className="text-customText w-10">{artist?.name}</span>
+        {type === "release" && (
+          <h1 className="leading-none text-customText text-xl">{`${title}`}</h1>
+        )}
+        <span className="text-customText w-10">{name}</span>
       </div>
     </div>
   );

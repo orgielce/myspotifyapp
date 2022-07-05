@@ -16,7 +16,14 @@ export const MainView = () => {
   const {albums, page, limit, isLoading, error} = useSelector(
     (state: RootState) => state.releases
   );
-  const {access_token} = useSelector((state: RootState) => state.token);
+  const {
+    artists,
+    page: currentPageArtist,
+    filter,
+    isLoading: isLoadingArtist,
+    error: errorArtist,
+  } = useSelector((state: RootState) => state.artistsFounded);
+  const {access_token, loadDataFrom} = useSelector((state: RootState) => state.token);
 
   useEffect(() => {
     dispatch(setAlbumsBegin());
@@ -34,17 +41,37 @@ export const MainView = () => {
 
   return (
     <>
-      {isLoading && <div className="app-spinner"></div>}
+      {loadDataFrom === "release" && (
+        <>
+          {isLoading && <div className="app-spinner"></div>}
 
-      {error &&
-        openPopup(
-          "error",
-          null,
-          `No fue posible cargar los nuevos lanzamientos, vualva a intentarlo por favor.`,
-          "top"
-        )}
+          {error &&
+            openPopup(
+              "error",
+              null,
+              `No fue posible cargar los nuevos lanzamientos, vualva a intentarlo por favor.`,
+              "top"
+            )}
 
-      <Presentation title="New releases" type={"release"} albums={albums} />
+          <Presentation title="New releases" type={"release"} albums={albums} />
+        </>
+      )}
+
+      {loadDataFrom === "artists" && (
+        <>
+          {isLoadingArtist && <div className="app-spinner"></div>}
+
+          {errorArtist &&
+            openPopup(
+              "error",
+              null,
+              `No fue posible cargar los artistas, vualva a intentarlo por favor.`,
+              "top"
+            )}
+
+          <Presentation title="Artistas Encontrados" type={"artist"} artists={artists} />
+        </>
+      )}
     </>
   );
 };

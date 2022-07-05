@@ -1,10 +1,9 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {Token} from "../../models/index";
 import {GetAccessToken} from "../../services/index";
-import {GetNewReleases} from "../../services/release.service";
-import {useDispatch} from "react-redux";
 
 const initialState: Token = {
+  loadDataFrom: "release",
   access_token: "",
   token_type: "",
   expires_in: 0,
@@ -16,7 +15,11 @@ const initialState: Token = {
 export const tokenSlice = createSlice({
   name: "token",
   initialState,
-  reducers: {},
+  reducers: {
+    setDataType: (state, action) => {
+      state.loadDataFrom = action.payload.loadDataFrom;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(GetAccessToken.pending, (state) => {
@@ -30,6 +33,7 @@ export const tokenSlice = createSlice({
       .addCase(GetAccessToken.fulfilled, (state, action) => {
         // @ts-ignore
         state.access_token = action.payload.data.access_token;
+        localStorage.setItem("accessToken", action.payload.data.access_token);
         // @ts-ignore
         state.token_type = action.payload.data.token_type;
         // @ts-ignore
@@ -44,23 +48,6 @@ export const tokenSlice = createSlice({
   },
 });
 
-// export const {GetToken} = tokenSlice.actions;
-
-// export const incrementAsync = (amount) => (dispatch) => {
-//   setTimeout(() => {
-//     dispatch(incrementByAmount(amount));
-//   }, 1000);
-// };
-
-// We can also write thunks by hand, which may contain both sync and async logic.
-// Here's an example of conditionally dispatching actions based on current state.
-// export const incrementIfOdd =
-//   (amount: number): AppThunk =>
-//   (dispatch, getState) => {
-//     const currentValue = selectCount(getState());
-//     if (currentValue % 2 === 1) {
-//       dispatch(incrementByAmount(amount));
-//     }
-//   };
+export const {setDataType} = tokenSlice.actions;
 
 export default tokenSlice.reducer;

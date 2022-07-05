@@ -1,8 +1,18 @@
-import React from "react";
+import React, {useCallback} from "react";
 import styled from "styled-components";
 import SpotifyLogo from "../assets/Spotify_logo_with_text.svg";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../redux/store";
+import debounce from "lodash.debounce";
+import {
+  setArtistsBegin,
+  setArtistsFiled,
+  setArtistsSuccess,
+} from "../redux/reducers/artistsSlice";
+import axios from "axios";
+import {BASE_APP_URL} from "../utilities/constants";
+import {SearchArtists} from "../models";
+import {setDataType} from "../redux/reducers/tokenSlice";
 
 const ImageContainer = styled.img`
   filter: brightness(100); // white
@@ -11,8 +21,39 @@ const ImageContainer = styled.img`
 `;
 
 export const Navbar = () => {
+  const dispatch = useDispatch();
   const {isAuthenticated} = useSelector((state: RootState) => state.token);
-  const searchHandler = (e: any) => console.log(e.target.value);
+  const {page} = useSelector((state: RootState) => state.artistsFounded);
+
+  const fetchData = (
+    type: string,
+    filter: SearchArtists["filter"],
+    page: SearchArtists["page"]
+  ) => {
+    dispatch(setDataType({loadDataFrom: "artists"}));
+    type === "artist" && dispatch(setArtistsBegin());
+    axios(
+      `${BASE_APP_URL}/search?q=artist%3A${filter}&type=${type}&limit=14&offset=${page}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
+      .then((res) => dispatch(setArtistsSuccess(res.data)))
+      .catch((error) => dispatch(setArtistsFiled()));
+  };
+
+  const changeHandler = (event: any) => {
+    // dispatch(setFilter(event.target.value));
+    const filter = event.target.value;
+    fetchData("artist", filter, page);
+  };
+
+  const debouncedChangeHandler = useCallback(debounce(changeHandler, 500), []);
 
   return (
     <header className="sticky top-0 z-50">
@@ -33,6 +74,7 @@ export const Navbar = () => {
               </div>
               <input
                 type="text"
+                onChange={debouncedChangeHandler}
                 className="w-80 bg-neutral border-none text-customText placeholder-customText text-sm rounded block w-full pl-10 p-2.5 hover:border-none focus:border-none"
                 placeholder="Buscar Artista"
               />

@@ -17,7 +17,7 @@ export const GetToken = () => {
     dispatch(GetAccessToken());
     if (isAuthenticated) {
       openPopup("info", null, `Hola Orgiel, su token ha sido guardado.`, "top");
-      history.push("/board");
+      history.push("/");
     }
   }, [isAuthenticated]);
 
