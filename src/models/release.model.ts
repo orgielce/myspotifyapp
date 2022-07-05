@@ -11,6 +11,13 @@ export interface SearchArtists {
   error: boolean;
 }
 
+export interface SearchTracks {
+  tracks: Tracks | undefined;
+  filter: string | undefined;
+  isLoading: boolean;
+  error: boolean;
+}
+
 export interface Albums {
   href: string;
   items: Item[];
@@ -19,6 +26,18 @@ export interface Albums {
   offset: number;
   previous: string;
   total: number;
+}
+
+export interface Tracks {
+  href: string;
+  items: any;
+  limit: number;
+  next: string;
+  offset: number;
+  previous: string;
+  total: number;
+  isLoading: boolean;
+  error: boolean;
 }
 
 export interface Artists {

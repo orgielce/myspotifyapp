@@ -15,6 +15,11 @@ import {
   setArtistsFiled,
   setArtistsSuccess,
 } from "../redux/reducers/artistsSlice";
+import {
+  setTracksBegin,
+  setTracksFiled,
+  setTracksSuccess,
+} from "../redux/reducers/tracksSlice";
 
 export const MainView = () => {
   const dispatch = useDispatch();
@@ -25,6 +30,12 @@ export const MainView = () => {
     isLoading: isLoadingArtist,
     error: errorArtist,
   } = useSelector((state: RootState) => state.artistsFounded);
+  const {
+    filter: filterTrack,
+    tracks,
+    isLoading: isLoadingTrack,
+    error: errorTrack,
+  } = useSelector((state: RootState) => state.tracksFounded);
   const {access_token, loadDataFrom, page, limit} = useSelector(
     (state: RootState) => state.token
   );
@@ -59,6 +70,22 @@ export const MainView = () => {
         .then((res) => dispatch(setArtistsSuccess(res.data)))
         .catch((error) => dispatch(setArtistsFiled()));
     }
+    if (loadDataFrom === "track") {
+      dispatch(setTracksBegin());
+      axios(
+        `${BASE_APP_URL}/search?q=track%3A${filterTrack}&type=track&limit=14&offset=${page}`,
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
+        .then((res) => dispatch(setTracksSuccess(res.data)))
+        .catch((error) => dispatch(setTracksFiled()));
+    }
   }, [page]);
 
   return (
@@ -92,6 +119,22 @@ export const MainView = () => {
             )}
 
           <Presentation title="Artistas Encontrados" type={"artist"} artists={artists} />
+        </>
+      )}
+
+      {loadDataFrom === "track" && (
+        <>
+          {isLoadingTrack && <div className="app-spinner"></div>}
+
+          {errorTrack &&
+            openPopup(
+              "error",
+              null,
+              `No fue posible cargar las canciones, vualva a intentarlo por favor.`,
+              "top"
+            )}
+
+          <Presentation title="Canciones Encontradas" type={"track"} tracks={tracks} />
         </>
       )}
     </>

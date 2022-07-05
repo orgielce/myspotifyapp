@@ -1,17 +1,19 @@
-import {Albums, Artist, Artists} from "../models";
+import {Albums, Artist, Artists, Tracks} from "../models";
 
 export type PresentationProps = {
   title: string;
   albums?: Albums;
   artists?: Artists;
-  type: "release" | "song" | "artist" | null;
+  tracks?: Tracks;
+  type: "release" | "track" | "artist" | null;
 };
 
 export type CardProps = {
   title: string;
   name: string;
   image: string;
-  type: "release" | "song" | "artist" | null;
+  track?: any;
+  type: "release" | "track" | "artist" | null;
 };
 
 export type NotificationType = "success" | "error" | "info" | "warning" | "open";

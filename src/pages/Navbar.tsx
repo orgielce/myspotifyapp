@@ -12,8 +12,14 @@ import {
 } from "../redux/reducers/artistsSlice";
 import axios from "axios";
 import {BASE_APP_URL} from "../utilities/constants";
-import {SearchArtists} from "../models";
+import {SearchArtists, Token} from "../models";
 import {setCurrentPage, setDataType} from "../redux/reducers/tokenSlice";
+import {
+  setTracksBegin,
+  setTracksFiled,
+  setTracksFilter,
+  setTracksSuccess,
+} from "../redux/reducers/tracksSlice";
 
 const ImageContainer = styled.img`
   filter: brightness(100); // white
@@ -31,36 +37,56 @@ export const Navbar = () => {
     console.log("Clear filters");
   }, [loadDataFrom]);
 
-  const fetchData = (
-    type: string,
-    filter: SearchArtists["filter"],
-    page: SearchArtists["page"]
-  ) => {
-    dispatch(setDataType({loadDataFrom: "artists"}));
+  const fetchData = (type: string, filter: string, page: Token["page"]) => {
+    dispatch(setDataType({loadDataFrom: type === "artist" ? "artists" : "track"}));
     dispatch(setCurrentPage({page: 10}));
-    type === "artist" && dispatch(setArtistsBegin());
-    axios(
-      `${BASE_APP_URL}/search?q=artist%3A${filter}&type=${type}&limit=14&offset=${page}`,
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      }
-    )
-      .then((res) => dispatch(setArtistsSuccess(res.data)))
-      .catch((error) => dispatch(setArtistsFiled()));
+    if (type === "artist") {
+      dispatch(setArtistsBegin());
+      axios(
+        `${BASE_APP_URL}/search?q=${type}%3A${filter}&type=${type}&limit=14&offset=${page}`,
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
+        .then((res) => dispatch(setArtistsSuccess(res.data)))
+        .catch((error) => dispatch(setArtistsFiled()));
+    } else if (type === "track") {
+      dispatch(setTracksBegin());
+      axios(
+        `${BASE_APP_URL}/search?q=${type}%3A${filter}&type=${type}&limit=14&offset=${page}`,
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
+        .then((res) => dispatch(setTracksSuccess(res.data)))
+        .catch((error) => dispatch(setTracksFiled()));
+    }
   };
 
-  const changeHandler = (event: any) => {
+  const fetchArtists = (event: any) => {
     const filter = event.target.value;
     dispatch(setFilter(filter));
     fetchData("artist", filter, page);
   };
 
-  const debouncedChangeHandler = useCallback(debounce(changeHandler, 500), []);
+  const fetchTracks = (event: any) => {
+    const filter = event.target.value;
+    dispatch(setTracksFilter(filter));
+    fetchData("track", filter, page);
+  };
+
+  const debouncedArtistsChangeHandler = useCallback(debounce(fetchArtists, 500), []);
+  const debouncedTracksChangeHandler = useCallback(debounce(fetchTracks, 500), []);
 
   return (
     <header className="sticky top-0 z-50">
@@ -81,7 +107,7 @@ export const Navbar = () => {
               </div>
               <input
                 type="text"
-                onChange={debouncedChangeHandler}
+                onChange={debouncedArtistsChangeHandler}
                 className="w-80 bg-neutral border-none text-customText placeholder-customText text-sm rounded block w-full pl-10 p-2.5 hover:border-none focus:border-none"
                 placeholder="Buscar Artista"
               />
@@ -101,6 +127,7 @@ export const Navbar = () => {
               </div>
               <input
                 type="text"
+                onChange={debouncedTracksChangeHandler}
                 className="w-80 bg-neutral border-none text-customText placeholder-customText text-sm rounded block w-full pl-10 p-2.5 hover:border-none focus:border-none"
                 placeholder="Buscar Canción"
               />

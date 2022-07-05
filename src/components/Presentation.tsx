@@ -11,6 +11,7 @@ export const Presentation: FunctionComponent<PresentationProps> = ({
   type,
   albums,
   artists,
+  tracks,
 }) => {
   const dispatch = useDispatch();
 
@@ -59,6 +60,25 @@ export const Presentation: FunctionComponent<PresentationProps> = ({
                   }
                   title={""}
                   type={"artist"}
+                />
+              ))}
+            {type === "track" &&
+              tracks?.items.map((element: any) => (
+                <Card
+                  key={element.id}
+                  name={element.name}
+                  image={
+                    element &&
+                    element.album &&
+                    element.album.images &&
+                    element.album.images.length &&
+                    element.album.images.length > 0
+                      ? element.album.images[0].url
+                      : ""
+                  }
+                  title={element.artists[0].name}
+                  type={"track"}
+                  track={element?.preview_url}
                 />
               ))}
           </div>
