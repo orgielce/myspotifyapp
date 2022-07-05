@@ -10,6 +10,8 @@ const initialState: Token = {
   isAuthenticated: false,
   isLoading: false,
   error: false,
+  page: 10,
+  limit: 14,
 };
 
 export const tokenSlice = createSlice({
@@ -18,6 +20,9 @@ export const tokenSlice = createSlice({
   reducers: {
     setDataType: (state, action) => {
       state.loadDataFrom = action.payload.loadDataFrom;
+    },
+    setCurrentPage: (state, action) => {
+      state.page = action.payload.page;
     },
   },
   extraReducers: (builder) => {
@@ -48,6 +53,6 @@ export const tokenSlice = createSlice({
   },
 });
 
-export const {setDataType} = tokenSlice.actions;
+export const {setDataType, setCurrentPage} = tokenSlice.actions;
 
 export default tokenSlice.reducer;

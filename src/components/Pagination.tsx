@@ -1,24 +1,22 @@
 import React, {useState} from "react";
 import {BsArrowLeftCircle, BsArrowRightCircle} from "react-icons/bs";
 import {useDispatch, useSelector} from "react-redux";
-import {setCurrentPage} from "../redux/reducers/releaseSlice";
+import {setCurrentPage} from "../redux/reducers/tokenSlice";
 import {RootState} from "../redux/store";
 
 export const Pagination = () => {
   const dispatch = useDispatch();
-  const [page, setPage] = useState(
-    useSelector((state: RootState) => state.releases.page)
-  );
+  const [page, setPage] = useState(useSelector((state: RootState) => state.token.page));
 
   const setNextValue = () => {
     setPage(page + 10);
-    dispatch(setCurrentPage(page));
+    dispatch(setCurrentPage({page}));
   };
 
   const setPreviousValue = () => {
     if (page === 10) return;
     setPage(page - 10);
-    dispatch(setCurrentPage(page));
+    dispatch(setCurrentPage({page}));
   };
 
   return (

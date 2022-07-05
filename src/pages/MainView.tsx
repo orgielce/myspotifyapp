@@ -10,33 +10,55 @@ import {
   setAlbumsSuccess,
 } from "../redux/reducers/releaseSlice";
 import {openPopup} from "../components/notification";
+import {
+  setArtistsBegin,
+  setArtistsFiled,
+  setArtistsSuccess,
+} from "../redux/reducers/artistsSlice";
 
 export const MainView = () => {
   const dispatch = useDispatch();
-  const {albums, page, limit, isLoading, error} = useSelector(
-    (state: RootState) => state.releases
-  );
+  const {albums, isLoading, error} = useSelector((state: RootState) => state.releases);
   const {
     artists,
-    page: currentPageArtist,
     filter,
     isLoading: isLoadingArtist,
     error: errorArtist,
   } = useSelector((state: RootState) => state.artistsFounded);
-  const {access_token, loadDataFrom} = useSelector((state: RootState) => state.token);
+  const {access_token, loadDataFrom, page, limit} = useSelector(
+    (state: RootState) => state.token
+  );
 
   useEffect(() => {
-    dispatch(setAlbumsBegin());
-    axios(`${BASE_APP_URL}/browse/new-releases?limit=${limit}&offset=${page}`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${access_token}`,
-      },
-    })
-      .then((res) => dispatch(setAlbumsSuccess(res.data)))
-      .catch((error) => dispatch(setAlbumsFiled()));
+    if (loadDataFrom === "release") {
+      dispatch(setAlbumsBegin());
+      axios(`${BASE_APP_URL}/browse/new-releases?limit=${limit}&offset=${page}`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${access_token}`,
+        },
+      })
+        .then((res) => dispatch(setAlbumsSuccess(res.data)))
+        .catch((error) => dispatch(setAlbumsFiled()));
+    }
+    if (loadDataFrom === "artists") {
+      dispatch(setArtistsBegin());
+      axios(
+        `${BASE_APP_URL}/search?q=artist%3A${filter}&type=artist&limit=14&offset=${page}`,
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
+        .then((res) => dispatch(setArtistsSuccess(res.data)))
+        .catch((error) => dispatch(setArtistsFiled()));
+    }
   }, [page]);
 
   return (

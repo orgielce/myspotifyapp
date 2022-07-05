@@ -6,4 +6,6 @@ export interface Token {
   isAuthenticated: boolean;
   isLoading: boolean;
   error: boolean;
+  page: number;
+  limit: number;
 }

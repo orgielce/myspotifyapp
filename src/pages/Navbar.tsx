@@ -1,4 +1,4 @@
-import React, {useCallback} from "react";
+import React, {useCallback, useEffect} from "react";
 import styled from "styled-components";
 import SpotifyLogo from "../assets/Spotify_logo_with_text.svg";
 import {useDispatch, useSelector} from "react-redux";
@@ -8,11 +8,12 @@ import {
   setArtistsBegin,
   setArtistsFiled,
   setArtistsSuccess,
+  setFilter,
 } from "../redux/reducers/artistsSlice";
 import axios from "axios";
 import {BASE_APP_URL} from "../utilities/constants";
 import {SearchArtists} from "../models";
-import {setDataType} from "../redux/reducers/tokenSlice";
+import {setCurrentPage, setDataType} from "../redux/reducers/tokenSlice";
 
 const ImageContainer = styled.img`
   filter: brightness(100); // white
@@ -22,8 +23,13 @@ const ImageContainer = styled.img`
 
 export const Navbar = () => {
   const dispatch = useDispatch();
-  const {isAuthenticated} = useSelector((state: RootState) => state.token);
-  const {page} = useSelector((state: RootState) => state.artistsFounded);
+  const {isAuthenticated, loadDataFrom, page} = useSelector(
+    (state: RootState) => state.token
+  );
+
+  useEffect(() => {
+    console.log("Clear filters");
+  }, [loadDataFrom]);
 
   const fetchData = (
     type: string,
@@ -31,6 +37,7 @@ export const Navbar = () => {
     page: SearchArtists["page"]
   ) => {
     dispatch(setDataType({loadDataFrom: "artists"}));
+    dispatch(setCurrentPage({page: 10}));
     type === "artist" && dispatch(setArtistsBegin());
     axios(
       `${BASE_APP_URL}/search?q=artist%3A${filter}&type=${type}&limit=14&offset=${page}`,
@@ -48,8 +55,8 @@ export const Navbar = () => {
   };
 
   const changeHandler = (event: any) => {
-    // dispatch(setFilter(event.target.value));
     const filter = event.target.value;
+    dispatch(setFilter(filter));
     fetchData("artist", filter, page);
   };
 

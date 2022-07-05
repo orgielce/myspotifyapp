@@ -27,21 +27,13 @@ export const artistsSlice = createSlice({
       state.isLoading = true;
       state.error = false;
     },
-    setCurrentPage: (state, action) => {
-      state.page = action.payload;
-    },
     setFilter: (state, action) => {
       state.filter = action.payload;
     },
   },
 });
 
-export const {
-  setArtistsBegin,
-  setArtistsSuccess,
-  setArtistsFiled,
-  setCurrentPage,
-  setFilter,
-} = artistsSlice.actions;
+export const {setArtistsBegin, setArtistsSuccess, setArtistsFiled, setFilter} =
+  artistsSlice.actions;
 
 export default artistsSlice.reducer;
