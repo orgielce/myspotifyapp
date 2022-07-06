@@ -64,6 +64,8 @@ export interface Artist {
   images: Image[];
   popularity?: number;
   related_artists?: [];
+  albums?: [];
+  tracks?: [];
 }
 
 export interface Item {

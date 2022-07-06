@@ -31,6 +31,7 @@ export const Details = () => {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     }).then((res) => {
+      // fetch related artists
       axios(`${BASE_APP_URL}/artists/${artistId}/related-artists`, {
         method: "GET",
         headers: {
@@ -39,9 +40,34 @@ export const Details = () => {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
       }).then((related) => {
-        const artist: Artist = {...res.data, related_artists: related.data.artists};
-        console.log(artist, 11111111);
-        setCurrentArtist(artist);
+        // fetch albums artist
+        axios(`${BASE_APP_URL}/artists/${artistId}/albums`, {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }).then((albums) => {
+          // fetch Artist's Top Tracks
+          axios(`${BASE_APP_URL}/artists/${artistId}/top-tracks?market=ES`, {
+            method: "GET",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          }).then((tracks) => {
+            const artist: Artist = {
+              ...res.data,
+              related_artists: related.data.artists,
+              albums: albums.data.items,
+              tracks: tracks.data.items,
+            };
+            console.log(artist, 5555555);
+            setCurrentArtist(artist);
+          });
+        });
       });
     });
   }, [artistId]);

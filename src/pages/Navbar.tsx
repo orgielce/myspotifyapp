@@ -35,7 +35,7 @@ export const Navbar = () => {
   );
 
   useEffect(() => {
-    console.log("Clear filters");
+    // console.log("Clear filters");
   }, [loadDataFrom]);
 
   const fetchData = (type: string, filter: string, page: Token["page"]) => {
