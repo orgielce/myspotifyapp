@@ -2,12 +2,12 @@ import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../redux/store";
 import {GetAccessToken} from "../services";
-import {useHistory} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {openPopup} from "../components/notification";
 
 export const GetToken = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  let navigate = useNavigate();
   const {isAuthenticated, isLoading, error} = useSelector(
     (state: RootState) => state.token
   );
@@ -17,7 +17,7 @@ export const GetToken = () => {
     dispatch(GetAccessToken());
     if (isAuthenticated) {
       openPopup("info", null, `Hola Orgiel, su token ha sido guardado.`, "top");
-      history.push("/");
+      navigate("/");
     }
   }, [isAuthenticated]);
 

@@ -1,7 +1,7 @@
 import React, {FunctionComponent} from "react";
 
 import {CardProps} from "../utilities/types";
-import {useHistory} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 export const Card: FunctionComponent<CardProps> = ({
   title,
@@ -11,11 +11,11 @@ export const Card: FunctionComponent<CardProps> = ({
   id,
   track,
 }) => {
-  const history = useHistory();
+  let navigate = useNavigate();
 
   const goToDetails = () => {
     if (type === "release") {
-      history.push(`/details/${id}`);
+      navigate(`/details/${id}`);
     }
   };
 

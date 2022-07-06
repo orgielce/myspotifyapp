@@ -12,7 +12,7 @@ import {
 } from "../redux/reducers/artistsSlice";
 import axios from "axios";
 import {BASE_APP_URL} from "../utilities/constants";
-import {SearchArtists, Token} from "../models";
+import {Token} from "../models";
 import {setCurrentPage, setDataType} from "../redux/reducers/tokenSlice";
 import {
   setTracksBegin,
@@ -20,6 +20,7 @@ import {
   setTracksFilter,
   setTracksSuccess,
 } from "../redux/reducers/tracksSlice";
+import {Link} from "react-router-dom";
 
 const ImageContainer = styled.img`
   filter: brightness(100); // white
@@ -92,7 +93,9 @@ export const Navbar = () => {
     <header className="sticky top-0 z-50">
       <nav className="bg-secondary border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
         <div className="flex flex-wrap items-start">
-          <ImageContainer src={SpotifyLogo} alt="SpotifyLogo" />
+          <Link to="/logo">
+            <ImageContainer src={SpotifyLogo} alt="SpotifyLogo" />
+          </Link>
           <div className="flex items-center ml-20">
             <div className="relative w-full">
               <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
