@@ -22,8 +22,10 @@ export const Details = () => {
   const {id: artistId} = useParams();
   // @ts-ignore
   const [currentArtist, setCurrentArtist] = useState<Artist>({});
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    setIsLoading(true);
     axios(`${BASE_APP_URL}/artists/${artistId}`, {
       method: "GET",
       headers: {
@@ -63,8 +65,9 @@ export const Details = () => {
               ...res.data,
               related_artists: related.data.artists,
               albums: albums.data.items,
-              tracks: tracks.data.items,
+              tracks: tracks.data.tracks,
             };
+            setIsLoading(false);
             setCurrentArtist(artist);
           });
         });
@@ -74,6 +77,7 @@ export const Details = () => {
 
   return (
     <>
+      {isLoading && <div className="app-spinner"></div>}
       <div className="grid grid-cols-5 gap-36 h-screen mb-64">
         <div className="col-span-2">
           <img
