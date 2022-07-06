@@ -24,7 +24,8 @@ export const Details = () => {
   return (
     <>
       <div className="grid grid-cols-5 gap-20 h-screen">
-        <div className="col-span-2">{currentArtist.name}</div>
+        {/*<div className="col-span-2">{currentArtist.name}</div>*/}
+        <div className="col-span-2">11111111111</div>
         <div className="col-span-3">2nd col</div>
       </div>
     </>

@@ -22,7 +22,8 @@ export const GetToken = () => {
   }, [isAuthenticated]);
 
   return (
-    <>
+    // @ts-ignore
+    <div className="h-screen">
       {isLoading && <div className="app-spinner"></div>}
 
       {error &&
@@ -40,6 +41,6 @@ export const GetToken = () => {
       >
         Haga clic para obtener token
       </button>
-    </>
+    </div>
   );
 };

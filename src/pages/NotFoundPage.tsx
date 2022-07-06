@@ -13,7 +13,7 @@ const SpanContainer = styled.span`
 
 export const NotFoundPage = () => {
   return (
-    <div className="grid h-full place-items-center">
+    <div className="grid h-screen place-items-center">
       <div className="text-white text-9xl font-bold">404!</div>
       <div className="text-neutral text-2xl font-bold -mt-96">
         Ruta no encontrada, para regresar al inicio haga clic

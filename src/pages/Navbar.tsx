@@ -93,7 +93,7 @@ export const Navbar = () => {
     <header className="sticky top-0 z-50">
       <nav className="bg-secondary border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
         <div className="flex flex-wrap items-start">
-          <Link to="/logo">
+          <Link to="/">
             <ImageContainer src={SpotifyLogo} alt="SpotifyLogo" />
           </Link>
           <div className="flex items-center ml-20">

@@ -1,5 +1,5 @@
 import React from "react";
-import {Routes, Route} from "react-router-dom";
+import {Routes, Route, Navigate} from "react-router-dom";
 
 import styled from "styled-components";
 import "./App.scss";
@@ -9,7 +9,8 @@ import {MainView} from "./pages/MainView";
 import {GetToken} from "./pages/GetToken";
 import {NotFoundPage} from "./pages/NotFoundPage";
 import {Details} from "./components/Details";
-import {Logo} from "./pages/logo";
+import {useSelector} from "react-redux";
+import {RootState} from "./redux/store";
 
 const Main = styled.main`
   color: white;
@@ -17,15 +18,34 @@ const Main = styled.main`
 `;
 
 const App = () => {
+  const {isAuthenticated} = useSelector((state: RootState) => state.token);
+  // @ts-ignore
+  function PrivateRoute({children}) {
+    return isAuthenticated ? children : <Navigate to="/token" />;
+  }
+
   return (
     <>
       <Navbar />
       <Main className="relative bg-primary h-full overflow-hidden">
         <Routes>
           <Route path="/token" element={<GetToken />} />
-          <Route path="/logo" element={<Logo />} />
-          <Route path="/" element={<MainView />} />
-          <Route path="/details/:id" element={<Details />} />
+          <Route
+            path="/"
+            element={
+              <PrivateRoute>
+                <MainView />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/details/:id"
+            element={
+              <PrivateRoute>
+                <Details />
+              </PrivateRoute>
+            }
+          />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Main>
