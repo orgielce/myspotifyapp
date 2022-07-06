@@ -5,6 +5,7 @@ import {BASE_APP_URL} from "../utilities/constants";
 import {Artist} from "../models";
 import styled from "styled-components";
 import {RelatedArtists} from "./RelatedArtists";
+import {ArtistHistory} from "./ArtistHistory";
 
 const DivideContainer = styled.div`
   border: 0.1px solid #8f8e94 !important;
@@ -64,7 +65,6 @@ export const Details = () => {
               albums: albums.data.items,
               tracks: tracks.data.items,
             };
-            console.log(artist, 5555555);
             setCurrentArtist(artist);
           });
         });
@@ -111,7 +111,9 @@ export const Details = () => {
 
           <RelatedArtists artist={currentArtist} />
         </div>
-        <div className="col-span-3">2nd col</div>
+        <div className="col-span-3">
+          <ArtistHistory artist={currentArtist} />
+        </div>
       </div>
     </>
   );

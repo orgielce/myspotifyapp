@@ -21,4 +21,8 @@ export type RelatedArtistsProps = {
   artist: Artist;
 };
 
+export type ArtistHistoryProps = {
+  artist: Artist;
+};
+
 export type NotificationType = "success" | "error" | "info" | "warning" | "open";
