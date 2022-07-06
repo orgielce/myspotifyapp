@@ -63,6 +63,7 @@ export interface Artist {
   uri: string;
   images: Image[];
   popularity?: number;
+  related_artists?: [];
 }
 
 export interface Item {

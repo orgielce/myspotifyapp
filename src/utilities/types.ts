@@ -17,4 +17,8 @@ export type CardProps = {
   type: "release" | "track" | "artist" | null;
 };
 
+export type RelatedArtistsProps = {
+  artist: Artist;
+};
+
 export type NotificationType = "success" | "error" | "info" | "warning" | "open";
